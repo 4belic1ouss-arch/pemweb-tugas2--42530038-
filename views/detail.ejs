@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= judul %> | PINK NOISE CLUB</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="detail-container">
+    <p class="eyebrow">A LITTLE SOMETHING FOR YOU ♡</p>
+
+    <article class="detail-card">
+      <div>
+        <% if (item.id === 4) { %>
+          <img class="detail-image" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85" alt="Croissant">
+        <% } else if (item.id === 5) { %>
+          <img class="detail-image" src="https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=900&q=85" alt="Roti dan pastry">
+        <% } else { %>
+          <img class="detail-image" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=900&q=85" alt="Coffee">
+        <% } %>
+      </div>
+
+      <div class="detail-info">
+        <p class="eyebrow">
+          <%= item.kategori === 'kopi' ? 'COFFEE ♡' : 'SWEET BITES ♡' %>
+        </p>
+
+        <h1><%= item.nama %></h1>
+
+        <p class="detail-price">
+          Rp <%= Number(item.harga || item.hargaJual || item.price || 0).toLocaleString('id-ID') %>
+        </p>
+
+        <p>
+          A little treat to brighten your day.
+          Choose your favorite, take a moment, and enjoy it with love.
+        </p>
+
+        <a href="/menu" class="button button-pink">← Back to menu</a>
+      </div>
+    </article>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

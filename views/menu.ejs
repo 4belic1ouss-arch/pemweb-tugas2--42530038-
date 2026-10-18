@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= judul %> | PINK NOISE CLUB</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <p class="eyebrow">YOUR LITTLE HAPPY PLACE ♡</p>
+
+      <h1>
+        A little sip,<br>
+        <span>a little happiness.</span>
+      </h1>
+
+      <p class="hero-description">
+        Kopi, pastry, and pretty little moments.
+        Made with love, just for you.
+      </p>
+
+      <a href="#our-menu" class="button button-pink">
+        Explore our menu ↗
+      </a>
+
+      <span class="hero-doodle doodle-one">♡</span>
+      <span class="hero-doodle doodle-two">✳</span>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu-section" id="our-menu">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">MADE FOR YOUR MOOD</p>
+          <h2>Our little menu<span class="pink-dot">.</span></h2>
+        </div>
+
+        <span class="menu-count">
+          <%= daftarMenu.length %> little treats ♡
+        </span>
+      </div>
+
+      <!-- FILTER KATEGORI -->
+      <form action="/menu" method="GET" class="filter-form">
+        <label for="kategori">Find your favorite</label>
+
+        <select name="kategori" id="kategori" onchange="this.form.submit()">
+          <option value="" <%= !kategori ? 'selected' : '' %>>
+            All menu
+          </option>
+
+          <option value="kopi" <%= kategori === 'kopi' ? 'selected' : '' %>>
+            Coffee
+          </option>
+
+          <option value="makanan" <%= kategori === 'makanan' ? 'selected' : '' %>>
+            Pastry &amp; bites
+          </option>
+        </select>
+      </form>
+
+      <!-- KARTU PRODUK -->
+      <% if (daftarMenu.length > 0) { %>
+        <div class="menu-grid">
+          <% daftarMenu.forEach(item => {
+            let foto = '';
+
+            if (item.id === 1) {
+              foto = 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=85';
+            } else if (item.id === 2) {
+              foto = 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=85';
+            } else if (item.id === 3) {
+              foto = 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=800&q=85';
+            } else if (item.id === 4) {
+              foto = 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=85';
+            } else {
+              foto = 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=800&q=85';
+            }
+
+            const harga = Number(
+              item.harga ?? item.hargaJual ?? item.price ?? 0
+            );
+          %>
+
+            <article class="menu-card">
+              <a href="/menu/<%= item.id %>" class="image-wrap">
+                <img
+                  class="product-image"
+                  src="<%= foto %>"
+                  alt="<%= item.nama %>"
+                  loading="lazy"
+                  onerror="this.onerror=null;this.src='https://placehold.co/600x450/fff1f3/c96886?text=PINK+NOISE+CLUB';"
+                >
+
+                <span class="image-label">
+                  <%= item.kategori === 'kopi' ? 'COFFEE ♡' : 'SWEET BITES ♡' %>
+                </span>
+              </a>
+
+              <div class="menu-card-content">
+                <div class="menu-card-top">
+                  <h3><%= item.nama %></h3>
+                  <span class="heart-icon">♡</span>
+                </div>
+
+                <p class="menu-category">
+                  <%= item.kategori === 'kopi'
+                    ? 'A little coffee break'
+                    : 'A little sweet treat' %>
+                </p>
+
+                <div class="menu-card-bottom">
+                  <span class="price">
+                    Rp <%= harga.toLocaleString('id-ID') %>
+                  </span>
+
+                  <a href="/menu/<%= item.id %>" class="detail-link">
+                    View details ↗
+                  </a>
+                </div>
+              </div>
+            </article>
+
+          <% }) %>
+        </div>
+      <% } else { %>
+
+        <!-- JIKA MENU KOSONG -->
+        <div class="empty-state">
+          <span>♡</span>
+          <h3>Oops, nothing here yet!</h3>
+          <p>Try another category to find your favorite treat.</p>
+          <a href="/menu" class="button button-pink">See all menu</a>
+        </div>
+
+      <% } %>
+    </section>
+
+    <!-- PAPER BAG PINK NOISE CLUB -->
+    <section class="packaging-section" id="our-packaging">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PACKED WITH LOVE ♡</p>
+          <h2>A little something special<span class="pink-dot">.</span></h2>
+        </div>
+      </div>
+
+      <div class="packaging-grid">
+        <!-- SIGNATURE PAPER BAG -->
+        <article class="packaging-item">
+          <div class="packaging-scene bag-scene">
+            <span class="packaging-sparkle sparkle-a">✦</span>
+            <span class="packaging-sparkle sparkle-b">♡</span>
+            <span class="bag-floating-heart">♥</span>
+
+            <div class="pink-noise-bag">
+              <div class="bag-handle"></div>
+              <div class="bag-top-fold"></div>
+
+              <div class="bag-main">
+                <div class="bag-brand">
+                  <span class="bag-brand-top">YOUR DAILY LITTLE JOY</span>
+
+                  <div class="bag-brand-name">
+                    PINK<br>
+                    <span>NOISE</span><br>
+                    CLUB
+                  </div>
+
+                  <div class="bag-brand-heart">♡</div>
+                  <div class="bag-brand-line"></div>
+
+                  <span class="bag-brand-bottom">
+                    A LITTLE SIP, A LITTLE HAPPINESS
+                  </span>
+                </div>
+
+                <span class="bag-heart-doodle doodle-left">♡</span>
+                <span class="bag-star-doodle doodle-right">✳</span>
+                <span class="bag-tiny-doodle">· · · ♡ · · ·</span>
+              </div>
+
+              <div class="bag-bottom"></div>
+              <div class="bag-side"></div>
+            </div>
+          </div>
+
+          <h3>The Pink Noise tote</h3>
+          <p>A soft cream paper bag with signature pink details.</p>
+        </article>
+
+        <!-- COFFEE CUP -->
+        <article class="packaging-item">
+          <div class="packaging-scene cup-scene">
+            <span class="packaging-sparkle sparkle-a">✳</span>
+            <span class="packaging-sparkle sparkle-b">♡</span>
+
+            <div class="pink-cup">
+              <div class="cup-lid"></div>
+              <div class="cup-body">
+                <span class="cup-small-text">PINK</span>
+                <strong>NOISE<br>CLUB</strong>
+                <span class="cup-heart">♡</span>
+              </div>
+              <div class="cup-base"></div>
+            </div>
+          </div>
+
+          <h3>Your daily little sip</h3>
+          <p>A cute pink-accented cup for your coffee break.</p>
+        </article>
+
+        <!-- PASTRY BOX -->
+        <article class="packaging-item">
+          <div class="packaging-scene box-scene">
+            <span class="packaging-sparkle sparkle-a">♡</span>
+            <span class="packaging-sparkle sparkle-b">✦</span>
+
+            <div class="pastry-box">
+              <div class="box-lid">
+                <span class="box-brand">PINK<br>NOISE CLUB</span>
+                <span class="box-heart">♡</span>
+              </div>
+              <div class="box-front">
+                <span>BAKED WITH LOVE</span>
+              </div>
+            </div>
+          </div>
+
+          <h3>Sweet little box</h3>
+          <p>Pretty packaging for your favorite pastry and bites.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- LOVE NOTE -->
+    <section class="love-note">
+      <span class="love-note-icon">♡</span>
+      <p class="eyebrow">A LITTLE REMINDER</p>
+      <h2>You deserve something sweet today.</h2>
+      <p>Take a break, sip slowly, and enjoy your little moment.</p>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

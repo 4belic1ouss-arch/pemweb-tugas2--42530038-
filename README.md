@@ -22,4 +22,4 @@ Website katalog kopi dan makanan yang dibuat untuk tugas Pemrograman Web menggun
 4. Buka `http://localhost:3000/menu` di browser.
 
 ## Video Demonstrasi
-Link YouTube: [](https://youtu.be/CszvME1oxqQ?si=qqT79i4WI6XKQ7RN).
+Link YouTube: https://youtu.be/CszvME1oxqQ?si=qqT79i4WI6XKQ7RN
